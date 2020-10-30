@@ -70,6 +70,9 @@ class Crawler(object):
     def __setstate__(self, state):
         self.__dict__.update(state)
 
+    def __close__(self):
+        print(f'[-] ==== Crawler Close ====')
+
     def set_http_conf(self, headers=None, timeout=None):
         if headers:
             self._headers = headers
@@ -139,7 +142,7 @@ class Crawler(object):
         return _values
 
     async def _func_asy(self, _async_queue_task, se, _i):
-        # print(f'[+] _func_asy_i => {_i}')
+        print(f'[+] _func_asy_i => {_i}')
         while True:
             _key, _value = tuple(await _async_queue_task.get())
             if _key == self._status_exit or _key == self._status_over:
