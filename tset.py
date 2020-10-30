@@ -38,4 +38,4 @@ if __name__ == '__main__':
     with open('./out.txt', 'w', encoding='utf-8') as f:
         for i, v in enumerate(values):
             print(i, str(v), file=f)
-            print(f'{i}, {str(v)}')
+            # print(f'{i}, {str(v)}')

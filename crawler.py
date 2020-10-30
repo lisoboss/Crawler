@@ -70,7 +70,7 @@ class Crawler(object):
     def __setstate__(self, state):
         self.__dict__.update(state)
 
-    def __close__(self):
+    def __del__(self):
         print(f'[-] ==== Crawler Close ====')
 
     def set_http_conf(self, headers=None, timeout=None):
@@ -142,7 +142,7 @@ class Crawler(object):
         return _values
 
     async def _func_asy(self, _async_queue_task, se, _i):
-        print(f'[+] _func_asy_i => {_i}')
+        # print(f'[+] _func_asy_i => {_i}')
         while True:
             _key, _value = tuple(await _async_queue_task.get())
             if _key == self._status_exit or _key == self._status_over:
@@ -163,7 +163,7 @@ class Crawler(object):
             rp_callback = _value['rp_callback']
             allow_redirects = _value['allow_redirects']
 
-            # print(f'[+] seq => {seq} | url => {url}')
+            print(f'[+] seq => {seq} | url => {url}')
 
             result = None
             try:
@@ -226,7 +226,7 @@ class Crawler(object):
         # print(f'[-] _func_pool_run end => {_i}')
 
     def run(self):
-        print(f'[+] ==== run start ====')
+        print(f'[+] ==== Crawler Running ====')
         self.queue_start()
 
         for _i in range(self._pool_number):
